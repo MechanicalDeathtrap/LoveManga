@@ -1,0 +1,98 @@
+@import "/src/assets/colors"
+@import "/src/mixins/mixins"
+
+.settingsContainer
+  background: $dark-blue
+  display: flex
+  gap: 85px
+  padding: 71px 212px 0 116px
+
+
+.asideContainer
+  display: flex
+  flex-direction: column
+  gap: 32px
+
+.photoContainer
+  overflow: hidden
+  border-radius: 100px
+  background-position: center
+
+.profilePhoto
+  width: 148px
+
+.mainContainer
+  display: flex
+  flex-direction: column
+  gap: 65px
+
+.topContainer
+  display: flex
+  flex-direction: column
+  gap: 28px
+
+.profileName, .descriptionTitleContainer
+  display: flex
+  gap: 10px
+
+.name
+  color: #00D7E5
+  font-family: 'Audiowide', 'sans-serif'
+  font-size: 25px
+  font-weight: 400
+
+.profileInfo
+  display: flex
+  gap: 16px
+
+.info, .descriptionTitle
+  font-size: 14px
+  font-weight: 700
+
+.profileDescription
+  display: flex
+  flex-direction: column
+  gap: 18px
+
+.description
+  font-size: 16px
+  font-weight: 400
+
+.form
+  display: flex
+  gap: 43px
+  align-items: center
+
+  &__inputContainer
+    background: $lighter-blue
+    border-radius: 20px
+    display: flex
+    padding: 12px 10px
+    width: 676px
+
+  &__submitButton
+    @include button()
+    padding: 0 20px
+    height: 34px
+
+
+.descriptionInput
+  background: $lighter-blue
+  outline: none
+  border: none
+  width: 100%
+
+.delete_button
+  cursor: pointer
+
+.submitChangesButton
+  @include button()
+  padding: 8px 5px
+  width: 200px
+
+.changePhotoField
+  display: none
+
+.changePhotoButton
+  @include button()
+  padding: 8px 11px

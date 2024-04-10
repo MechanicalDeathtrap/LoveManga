@@ -1,0 +1,130 @@
+@import "/src/assets/colors"
+@import "/src/mixins/mixins"
+
+.border
+  height: 5px
+  background: linear-gradient(90deg, $dark-blue 0%, $dark-haki 50%, $dark-blue 100%)
+
+.titleContainer
+  background: $dark-blue
+  padding: 92px 277px 92px 94px
+  display: flex
+  gap: 69px
+
+.titleImage
+  width: 224px
+
+.asideContainer
+  display: flex
+  flex-direction: column
+  gap: 28px
+
+.titleButtons
+  display: flex
+  flex-direction: column
+  gap: 11px
+
+.titleButton
+  text-decoration: none
+  display: flex
+  justify-content: center
+  padding: 10px 0
+  @include button()
+
+.title
+  font-size: 25px
+  font-weight: 800
+  margin: 0
+
+.englishTitle
+  font-family: 'Audiowide', 'sans-serif'
+  color: $main-violet
+  font-size: 14px
+
+.titles
+  display: flex
+  flex-direction: column
+  gap: 12px
+
+.mainInfoContainer
+  display: flex
+  flex-direction: column
+  gap: 48px
+
+.star
+  width: 20px
+
+.smallInfo
+  display: flex
+  flex-direction: column
+  gap: 30px
+
+.description
+  font-size: 14px
+  font-weight: 400
+  margin: 0
+  line-height: 20px
+
+.mainContainer
+  display: flex
+  flex-direction: column
+  gap: 108px
+
+.genres
+  display: flex
+  gap: 10px
+
+.genre
+  padding: 10px 17px
+  font-size: 16px
+  font-weight: 700
+  background: $dark-green
+  border-radius: 20px
+
+.commentsTitle
+  font-size: 20px
+  font-weight: 400
+  margin: 0
+
+.commentsField
+  background: $lighter-blue
+  outline: none
+  border: none
+  border-radius: 20px
+  width: 100%
+
+.commentsField::-webkit-input-placeholder
+  color: $main-violet
+  font-size: 16px
+  font-weight: 600
+
+.topCommentsContainer
+  display: flex
+  flex-direction: column
+  gap: 31px
+
+.commentsSection
+  display: flex
+  flex-direction: column
+  gap: 62px
+
+.comments
+  display: flex
+  flex-direction: column
+  gap: 30px
+
+.fieldContainer
+  background: $lighter-blue
+  border-radius: 20px
+  display: flex
+  padding: 24px 24px
+
+.commentButton
+  background: $dark-green
+  border: none
+  border-radius: 20px
+  width: 30px
+  height: 30px
+  display: flex
+  align-items: center
+  cursor: pointer

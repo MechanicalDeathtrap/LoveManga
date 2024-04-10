@@ -1,0 +1,71 @@
+@import "/src/assets/colors"
+
+
+.logo
+  display: flex
+  gap: 3px
+  height: 31px
+  align-items: center
+
+.textLogo
+  align-items: end
+  display: flex
+
+.heartLogo
+  width: 21px
+  height: 21px
+
+.readerHeader
+  background: $dark-blue
+  padding: 22px 40px
+  display: flex
+  align-items: center
+  gap: 222px
+  position: sticky
+  top: 0
+  z-index: 1
+
+.smallHeaderInfo
+  display: flex
+  gap: 20px
+  align-items: center
+  font-size: 16px
+  font-weight: 700
+
+.chapterButton
+  display: flex
+  gap: 6px
+  align-items: center
+
+.rightArrow
+  transform: rotate(180deg)
+
+.arrow, .rightArrow
+  cursor: pointer
+
+.mainContent
+  display: flex
+  justify-content: center
+  background: $lighter-blue
+  position: relative
+
+.controlPanel
+  position: fixed
+  height: 190px
+  background: $checkbox-background
+  display: flex
+  flex-direction: column
+  gap: 27px
+  right: 17px
+  top: 300px
+  padding: 30px 15px
+  border-radius: 20px
+
+
+.panelButton
+  border: none
+  background: $checkbox-background
+
+.heartButton, .controlButton
+  width: 31px
+  cursor: pointer

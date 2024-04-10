@@ -1,0 +1,85 @@
+@import "src/assets/colors"
+
+.collectionContainer
+  padding: 53px 0
+  background: $dark-blue
+  position: relative
+  display: flex
+  flex-direction: column
+  gap: 70px
+
+.titleContainer
+  margin-left: 180px
+  display: flex
+  flex-direction: column
+  justify-content: start
+  width: 20%
+  gap: 5px
+
+.collectionTitle
+  font-size: 20px
+  font-weight: bold
+  margin: 0
+
+.bottomLine
+  height: 5px
+  background: linear-gradient(90deg, $dark-blue 0%, $main-violet 42%, $dark-blue 100%)
+
+.arrowContainer
+  border: 3px solid $arrow-border-color
+  width: 50px
+  display: flex
+  align-items: center
+  justify-content: center
+  border-radius: 30px
+  position: absolute
+  top: 277px
+  background: $dark-blue
+  z-index: 5
+
+.arrow
+  padding: 13px 15px 13px 13px
+
+.arrowRight
+  transform: rotate(180deg)
+  position: absolute
+  right: 67px
+
+.arrowLeft
+  position: absolute
+  left: 67px
+
+.card
+  display: flex
+  position: relative
+  background: $dark-blue
+  border-radius: 175px 10px 10px 20px
+  padding-left: 35px
+  align-items: end
+  height: 242px
+  width: 445px
+
+.textInformation
+  display: flex
+  flex-direction: column
+  gap: 10px
+
+.cardBorder
+  background-image: linear-gradient(100deg, $dark-haki 10%, $dark-blue 100%)
+  padding: 5px
+  width: 445px
+  border-radius: 180px 10px 10px 20px
+
+.collectionCards
+  display: flex
+  gap: 50px
+
+.info
+  width: 257px
+  color: $haki
+  z-index: 2
+
+.cardImage
+  position: absolute
+  right: 0
+  z-index: 0

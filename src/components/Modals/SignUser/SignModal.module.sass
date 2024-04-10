@@ -1,0 +1,145 @@
+@import "src/assets/colors"
+@import "/src/mixins/mixins"
+
+
+.modalWindow
+  z-index: 12
+  padding: 36px 47px 33px 47px
+  border-radius: 10px
+  position: relative
+  background: transparent
+
+.cross
+  position: absolute
+  right: 10px
+  top: 10px
+  cursor: pointer
+
+.title
+  font-size: 18px
+  font-weight: bold
+  margin: 0
+
+.modalContainer
+  display: flex
+  flex-direction: column
+  gap: 35px
+  position: relative
+
+.formField
+  padding: 13px 15px
+  border-radius: 20px
+  background: $dark-blue
+  border: transparent
+  outline: none
+
+.formField::-webkit-input-placeholder
+  color: $main-violet
+  font-size: 14px
+  font-weight: 600
+
+.fields
+  display: flex
+  flex-direction: column
+  gap: 22px
+  width: 342px
+
+.forms
+  display: flex
+  flex-direction: column
+  gap: 35px
+
+.submitButton
+  padding: 10px 40px
+  width: 224px
+  text-align: center
+  @include button()
+
+.signUpButton
+  display: flex
+  justify-content: center
+
+.buttonContainer
+  display: flex
+  justify-content: center
+
+.mainContent
+  display: flex
+  flex-direction: column
+  gap: 35px
+
+.signUpInfo
+  display: flex
+  flex-direction: column
+  gap: 9px
+  align-items: center
+  font-size: 14px
+  font-weight: 500
+
+.signUpLink
+  color: $main-violet
+  cursor: pointer
+
+.link
+  color: $main-violet
+  cursor: pointer
+
+.publicPrivacyContainer
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 10px
+
+.publicPrivacyText
+  font-size: 9px
+  font-weight: 400
+
+.checkbox
+  border-radius: 3px
+  border: 1px $main-violet solid
+  background: $checkbox-background
+  padding-bottom: 0
+
+.label
+  padding-bottom: 0
+
+
+input[type="checkbox"]
+  display: none
+
+input[type="checkbox"] + label
+  position: relative
+  padding-left: 15px
+
+input[type="checkbox"] + label::before
+  content: ""
+  display: inline-block
+  width: 10px
+  height: 10px
+  border: 2px solid $main-violet
+  border-radius: 3px
+  background-color: $checkbox-background
+  position: absolute
+  left: 0
+  top: 0
+
+
+input[type="checkbox"]:checked + label::before
+  background-color: $main-violet
+
+
+input[type="checkbox"] + label::after
+  content: ""
+  width: 5px
+  height: 5px
+  border-left: 2px solid white
+  border-bottom: 2px solid white
+  transform: rotate(-45deg)
+  position: absolute
+  left: 3px
+  top: 2px
+  opacity: 0
+
+
+input[type="checkbox"]:checked + label::after
+  opacity: 1

@@ -1,0 +1,67 @@
+@import "src/assets/colors"
+@import "/src/mixins/mixins"
+
+.header
+  display: flex
+  padding: 20px 50px
+  background: $dark-blue
+
+.logo
+  display: flex
+  gap: 3px
+  height: 31px
+  align-items: center
+  z-index: 1
+
+.textLogo
+  align-items: end
+  display: flex
+
+.heartLogo
+  width: 21px
+  height: 21px
+
+.links
+  text-decoration: none
+  color: white
+  font-weight: 300
+  font-size: 16px
+
+.navigationContainer
+  display: flex
+  gap: 119px
+  align-items: center
+
+.navigation
+  display: flex
+  gap: 29px
+  align-items: start
+
+.searchContainer
+  display: flex
+  gap: 5px
+  align-items: center
+  cursor: pointer
+
+.profileButton
+  @include button()
+  display: flex
+
+
+.buttonInsides
+  margin: 6px 20px
+  align-items: center
+  display: flex
+  gap: 5px
+
+.header
+  display: flex
+  justify-content: space-between
+
+.buttonLogo
+  width: 15px
+  height: auto
+
+.bottomLine
+  height: 3px
+  background: linear-gradient(90deg, $dark-blue 0%, $main-violet 50%, $dark-blue 100%)
