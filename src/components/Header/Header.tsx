@@ -4,25 +4,33 @@ import heartLogo from "../../assets/heart_logo.svg"
 import heartLogoMain from "../../assets/heart_logo_main.svg"
 import magnifyingGlass from "../../assets/magnifying_glass.svg"
 import 'normalize.css'
-import {SignModal} from "../Modals/SignUser/SignModal.tsx";
-import {useEffect,useState} from "react";
+import {AuthModal} from "../Modals/AuthUser/AuthModal.tsx";
+import {useEffect, useState} from "react";
 import Modal from 'react-modal';
-import styles from "../Modals/SignUser/SignModal.module.sass"
+import styles from "../Modals/AuthUser/AuthModal.module.sass"
 import {Link, useLocation} from "react-router-dom";
 import {SearchModal} from "../Modals/Search/SearchModal.tsx";
 import {ProfileModal} from "../Modals/Profile/ProfileModal.tsx";
+import {useAuthStore} from "../../stores/AuthStore/AuthStore.ts";
+import {UserTypes} from "../../types/User.types.ts";
+
+Modal.setAppElement("#root")
 
 export const Header = () =>{
-/*НЕ ЗАКОНЧЕНО*/
+
     const [visible, setVisible] = useState(false)
     const [profileVisible, setProfileVisible] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
-    const [path, setPath] = useState("None");
+    const [path, setPath] = useState("None")
+
 
     const location = useLocation();
-    const authorized = true;
+    const {isAuthorized } = useAuthStore();
+    let scrollElement :HTMLElement | null;
 
-    /*TODO     Modal.setAppElement("SignModal")???*/
+    const handleScroll = () =>{
+        scrollElement?.scrollIntoView({behavior: "smooth", block: "center"})
+    }
 
     const customStyles = {
         overlay: {
@@ -73,7 +81,6 @@ export const Header = () =>{
         },
     };
 
-
     useEffect(() =>{
         const currentPath = () => {
             if (location.pathname === "/catalogue") {
@@ -82,26 +89,43 @@ export const Header = () =>{
             else setPath("None")
         }
         currentPath();
-        console.log(path);
     }, [path, location])
 
+    useEffect(() =>{
+        scrollElement  = document.getElementById('popularContainer')
+    }, [])
+
+    const checkLocalStorage = () => {
+        const userInfo =  localStorage.getItem('user')
+        return !!userInfo;
+    }
+
+    const checkUserProfileInfo = (value : string) =>{
+        const user : UserTypes = localStorage.getItem('user')
+        switch(value){
+            case 'avatarUrl':
+                return user.avatarUrl
+            case 'userDescription':
+                return user.userDescription
+        }
+    }
 
     return(
         <header className={style.header}>
-            <Link to='/' className={style.logo}>
-                <img src={textLogo} className={style.textLogo} alt="textLogo"/>
-                <img src={heartLogoMain} className={style.heartLogo} alt="heartLogo"/>
-            </Link>
+            <div className={style.logoContainer}>
+                <Link to='/' className={style.logo}>
+                    <img src={textLogo} className={style.textLogo} alt="textLogo"/>
+                    <img src={heartLogoMain} className={style.heartLogo} alt="heartLogo"/>
+                </Link>
+            </div>
+
             <div className={style.navigationContainer}>
                 <nav className={style.navigation}>
-                    {/* TODO Link to POPULAR part of home page*/}
-                    <a href="#" className={style.links} >Популярное</a>
+                    <button type='button' onClick={() =>  handleScroll()} className={style.popularButton} >Популярное</button>
                     <div className={style.searchContainer} onClick={() => {setSearchVisible(true)}}>
-                        {/* TODO Link to search modal window*/}
                         <span className={style.links} >Поиск</span>
                         <img src={magnifyingGlass} alt=""/>
                     </div>
-                    {/* TODO Link to catalogue page*/}
                     <div>
                         <Link to='/catalogue' className={style.links}>Каталог</Link>
                         {(path === "Catalogue") ?
@@ -109,7 +133,7 @@ export const Header = () =>{
                         }
                     </div>
                 </nav>
-                { authorized ?  (
+                { !isAuthorized && !checkLocalStorage() ?  (
                     <>
                         <button className={style.profileButton} onClick={() => {setVisible(true)}}>
                             <span className={style.buttonInsides}>
@@ -121,14 +145,22 @@ export const Header = () =>{
                                onRequestClose={() => {setVisible(true)}}
                                style={customStyles}>
                             <img src="/src/assets/cross.svg" alt="cross" className={styles.cross} onClick={() => {setVisible(false)}}/>
-                            <SignModal/>
+                            <AuthModal isVisible={setVisible}/>
                         </Modal>
                     </>)
 
                     :
 
                     <>
-                        <img src={heartLogo} alt="heart-logo" className="profilePhoto" onClick={() => {setProfileVisible(!profileVisible)}}/>
+                        {
+                            (checkUserProfileInfo('avatarUrl')) ?
+                                <img src={checkUserProfileInfo('avatarUrl')} alt="heart-logo" className="profilePhoto"
+                                     onClick={() => {setProfileVisible(!profileVisible)}}/>
+                                :
+                                <img src={heartLogo} alt="heart-logo" className="profilePhoto"
+                                     onClick={() => {setProfileVisible(!profileVisible)}}/>
+                        }
+
                         <Modal isOpen={profileVisible}
                                onRequestClose={() => {setProfileVisible(false)}}
                                style={profileCustomStyles}>
@@ -141,7 +173,7 @@ export const Header = () =>{
                        onRequestClose={() => {setSearchVisible(false)}}
                        style={customStyles}>
                     <img src="/src/assets/cross.svg" alt="cross" className={styles.cross} onClick={() => {setSearchVisible(false)}}/>
-                    <SearchModal/>
+                    <SearchModal props={setSearchVisible}/>
                 </Modal>
             </div>
         </header>

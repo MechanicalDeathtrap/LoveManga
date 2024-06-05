@@ -1,6 +1,10 @@
-import style from "./Collections.module.sass"
+import style from "./MangaCompilationsSlider.module.sass"
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-export const Collections = () => {
+export const MangaCompilationsSlider = () => {
+
+
     return(
         <div className={style.collectionContainer}>
             <div className={style.titleContainer}>
@@ -8,14 +12,14 @@ export const Collections = () => {
                 <div className={style.bottomLine}></div>
             </div>
 
-            <div className={style.collectionCards}>
+            <div className={style.collectionCards} >
                 <div className={style.cardBorder}>
                     <div className={style.card}>
                         <div className={style.textInformation}>
                             <h3 className={style.collectionTitle}>У нас любовь!</h3>
                             <p className={style.info}>Здесь собраны только самые романтичные тайтлы, представленные на нашем сайте</p>
                         </div>
-                        <img src="/src/assets/manga.png" alt="card_image" className={style.cardImage}/>
+                        <img src="/src/assets/manga.png" alt="card_image" className={`${style.cardImage} ${style.loveCollectionImage}`}/>
                     </div>
                 </div>
                 <div className={style.cardBorder}>

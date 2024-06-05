@@ -68,11 +68,13 @@
 .mainContainer
   display: flex
   flex-direction: column
-  gap: 108px
+  gap: 83px
 
 .genres
   display: flex
+  flex-wrap: wrap
   gap: 10px
+  height: max-content
 
 .genre
   padding: 10px 17px
@@ -128,3 +130,14 @@
   display: flex
   align-items: center
   cursor: pointer
+
+.notDisplayed
+  display: none
+
+.errorMessage
+  padding: 10px
+  background-color: $error-color
+  color: white
+  border-radius: 20px
+  font-size: 11px
+  font-weight: 200

@@ -1,38 +1,51 @@
+@import "/src/mixins/adaptiveMixins"
 
 .cardContainer
-  background: url("../../assets/placeholderImage.png") lightgray 50% / cover no-repeat
-  width: 208px
+  width: 14vw
   height: 319px
   display: flex
   align-items: end
   text-decoration: none
+  position: relative
+
+.imageContainer
+  position: absolute
+
+.titleImage
+  width: 100%
+  min-width: 160px
+  min-height: 202px
+  height: auto
 
 .shadowBlock
   background: rgba(12, 10, 38, 0.70)
   padding: 8px 14px
   display: flex
   flex-direction: column
-  gap: 12px
+  gap: 10px
+  z-index: 5
+  width: 120%
+  text-overflow: ellipsis
 
 .titleName
   margin: 0
   text-align: center
-  font-size: 14px
+  @include adaptive_font(14)
   font-weight: bold
   line-height: 20px
 
 .descriptionContainer
   display: flex
-  gap: 31px
+  gap: 8%
   justify-content: center
 
 .score
-  font-size: 14px
+  @include adaptive_font(14)
   font-weight: bold
 
 .genresName
   font-family: "Montserrat", 'sans-serif'
-  font-size: 10px
+  @include adaptive_font(10)
   font-style: normal
   font-weight: 500
   display: flex

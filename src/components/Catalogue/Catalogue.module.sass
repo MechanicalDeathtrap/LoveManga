@@ -1,12 +1,40 @@
 @import "src/assets/colors"
 
+span
+  font-size: 13px
+  cursor: pointer
+  width: max-content
+  
+.star
+  width: 11px
+
+.accordionHeader
+  display: flex
+  align-items: center
+  gap: 5px
+  color: $main-violet
+
+.item
+  position: relative
+
+.itemBtn
+  background: $dark-blue
+  border: transparent
+  font-size: 16px
+  cursor: pointer
+
+.optionsContainer
+  display: flex
+  flex-direction: column
+  gap: 10px
+  padding: 5px
+  background: $dark-blue
+  width: 161px
+  z-index: 10
+
 .border
   height: 2px
   background: linear-gradient(90deg, $dark-blue 0%, $dark-haki 50%, $dark-blue 100%)
-
-.catalogueContainer
-  background: $dark-blue
-  border-top: linear-gradient(90deg, $dark-blue 0%, $dark-haki 50%, $dark-blue 100%)
 
 .filterTitle__title
   margin: 0
@@ -14,8 +42,10 @@
   font-weight: 400
 
 .catalogueContainer
+  background: $dark-blue
+  border-top: linear-gradient(90deg, $dark-blue 0%, $dark-haki 50%, $dark-blue 100%)
   display: flex
-  gap: 99px
+  gap: 80px
   padding: 77px 104px 104px 51px
 
 .filter
@@ -23,6 +53,7 @@
   flex-direction: column
   gap: 23px
   padding-top: 85px
+
 
 .filterTitleContainer
   display: flex
@@ -32,20 +63,23 @@
   display: flex
   flex-direction: column
   gap: 10px
+  background-color: $dark-blue
 
 .filterBorder
   background-image: linear-gradient(100deg,$main-violet 10%, $dark-haki 30%, $dark-blue 90%)
   padding: 3px
-  border-radius: 100px 0 0 20px
+  border-radius: 60px 0 0 10px
+
 
 .filterBorderBackground
   display: flex
   justify-content: center
   align-items: center
   gap: 5px
-  border-radius: 100px 0 0 20px
+  border-radius: 60px 0 0 10px
   padding: 8px
   background: $dark-blue
+  position: relative
 
 .filterSection
   font-size: 16px
@@ -78,6 +112,9 @@
   font-size: 14px
   font-weight: 400
   color: $main-violet
+  background: none
+  border: none
+  cursor: pointer
 
 .catalogueCollection
   display: flex
@@ -90,3 +127,22 @@
 
 .deleteFilters
   cursor: pointer
+
+option
+  border: none
+  background: transparent
+  cursor: pointer
+
+option:hover
+  color: $main-violet
+
+.searchButton
+  background: $main-violet
+  border-radius: 5px
+  border: none
+  padding: 5px
+  cursor: pointer
+
+.clearButton
+  background: transparent
+  border: none

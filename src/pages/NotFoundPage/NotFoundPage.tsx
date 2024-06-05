@@ -1,6 +1,6 @@
 import style from "./NotFoundPage.module.sass";
-import {Header} from "../Header/Header.tsx";
-import {Footer} from "../Footer/Footer.tsx";
+import {Header} from "../../components/Header/Header.tsx";
+import {Footer} from "../../components/Footer/Footer.tsx";
 import {Link} from "react-router-dom";
 
 

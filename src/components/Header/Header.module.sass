@@ -1,31 +1,48 @@
 @import "src/assets/colors"
 @import "/src/mixins/mixins"
+@import "/src/mixins/adaptiveMixins"
 
 .header
   display: flex
   padding: 20px 50px
   background: $dark-blue
+  position: fixed
+  width: 100vw
+  z-index: 5
 
 .logo
   display: flex
   gap: 3px
   height: 31px
   align-items: center
-  z-index: 1
 
 .textLogo
   align-items: end
   display: flex
+  z-index: 10
 
 .heartLogo
   width: 21px
   height: 21px
+  z-index: 10
 
 .links
   text-decoration: none
   color: white
   font-weight: 300
   font-size: 16px
+  cursor: pointer
+  @include tablet
+    @include adaptive_font_tablet(12)
+
+.popularButton
+  background: transparent
+  border: none
+  padding: 0
+  font-weight: 300
+  cursor: pointer
+  @include tablet
+    @include adaptive_font_tablet(12)
 
 .navigationContainer
   display: flex
@@ -36,23 +53,28 @@
   display: flex
   gap: 29px
   align-items: start
+  z-index: 40
 
 .searchContainer
   display: flex
   gap: 5px
   align-items: center
   cursor: pointer
+  z-index: 10
 
 .profileButton
   @include button()
   display: flex
-
+  @include tablet
+    @include adaptive_font_tablet(12)
 
 .buttonInsides
   margin: 6px 20px
   align-items: center
   display: flex
   gap: 5px
+  @include tablet
+    margin: 4px 8px
 
 .header
   display: flex

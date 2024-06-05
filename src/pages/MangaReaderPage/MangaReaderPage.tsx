@@ -1,11 +1,31 @@
 import textLogo from "../../assets/LOVEMANGA.svg"
 import heartLogoMain from "../../assets/heart_logo_main.svg"
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import style from "./MangaReaderPage.module.sass";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {MangaTypes} from "../../types/Manga.types.ts";
 
 export const MangaReaderPage = () =>{
+
+    const {id} = useParams();
     const [isRed, setIsRed] = useState(false);
+    const [mangaDetails, setMangaDetails] = useState({} as MangaTypes)
+    const pagesNumber = mangaDetails.pages? mangaDetails.pages.length : 0
+
+    const getMangaDetails = async () =>{
+        await axios.get(`http://localhost:4444/catalogue/id/${id}`)
+            .then((res) =>{
+                setMangaDetails(res.data)
+            })
+            .catch((err) =>{
+                console.log(`Не получить информацию о манге: ${err}`);
+            })
+    }
+
+    useEffect(() =>{
+        getMangaDetails();
+    }, [id])
 
     const changeColor = () =>{
         return isRed ? "#FF0000" : 'white'
@@ -19,16 +39,27 @@ export const MangaReaderPage = () =>{
                     <img src={heartLogoMain} className={style.heartLogo} alt="heartLogo"/>
                 </Link>
                 <div className={style.smallHeaderInfo}>
-                    <span className="mangaName">Невероятные приключения ДжоДжо</span>
+                    <span className="mangaName">{mangaDetails.title}</span>
                     <div className={style.chapterButton}>
                         <img src="/src/assets/arrow.svg" alt="arrow" className={style.arrow}/>
-                        <span className="chapterNumber">1 / 34</span>
+                        <span className="chapterNumber">1 / {pagesNumber}</span>
                         <img src="/src/assets/arrow.svg" alt="arrow" className={style.rightArrow}/>
                     </div>
                 </div>
             </header>
             <div className={style.mainContent}>
-                <img src="/src/assets/mangaPagePlaceholder.png" alt="manga_page"/>
+                <ul className="pagesList">
+                    {
+                        mangaDetails.pages ?
+                        mangaDetails.pages.map((page, index) =>{
+                            return(
+                                <li className={style.pagelist} key={index}>
+                                    <img src={page} loading="lazy" alt="manga_page" className={style.page}/>
+                                </li>
+                            )
+                        }) : <></>
+                    }
+                </ul>
                 <div className={style.controlPanel}>
                     <img src="/src/assets/list.svg" alt="list_logo" className={style.controlButton}/>
                     <img src="/src/assets/message.svg" alt="message_logo" className={style.controlButton}/>

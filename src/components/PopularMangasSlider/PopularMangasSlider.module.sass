@@ -1,9 +1,12 @@
 @import "../../assets/colors"
 @import "../../assets/fonts/fonts.css"
 
+.mainContainer
+  padding-top: 68px
+  background: $dark-blue
+
 .scrollContainer
   padding: 73px 67px 0 67px
-  background: $dark-blue
 
 .popularText
   font-family: "Audiowide", "sans-serif"
@@ -25,30 +28,37 @@
 
 .scrollInsides
   display: flex
-  justify-content: center
+  justify-content: space-between
   align-items: center
-  gap: 210px
-  padding: 51px 0
-
+  padding: 6.8vh 0
+  flex-direction: row
 
 .cards
   display: flex
-  gap: 89px
+  flex-direction: row
+  gap: 6.1vw
+  align-items: center
 
 .dot
   width: 10px
   height: 10px
   background: $dot-grey
   border-radius: 5px
+  border: none
+  padding: 0
 
 .chosenDot
   background: $main-violet
 
 .containerBorder
-  margin: -5px
-  border-radius: 5px
   display: flex
   flex-direction: column
+  background: $dark-blue
+
+.carouselContainer
+  display: flex
+  margin: 0
+  padding: 0
 
 .scrollDots
   display: flex
@@ -59,3 +69,12 @@
 .border
   height: 5px
   background: linear-gradient(90deg, $dark-blue 0%, $dark-haki 50%, $dark-blue 100%)
+
+.sliderContainer
+  display: flex
+  flex-direction: column
+  gap: 49px
+
+.disableSlide
+  display: none
+

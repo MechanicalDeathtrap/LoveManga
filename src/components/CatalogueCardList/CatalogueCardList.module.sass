@@ -1,5 +1,8 @@
 @import "src/assets/colors"
 
+li
+  list-style-type: none
+
 .cardContainer
   display: flex
   flex-direction: column
@@ -17,18 +20,26 @@
   padding: 0
 
 .cardTitle
-  font-size: 13px
   font-weight: 400
 
 .ratingContainer
   display: flex
   gap: 3px
-  background: rgb($dark-blue, 0.5)
+  background: rgb($dark-blue, 0.7)
   width: 91%
   position: absolute
   top: 5px
   left: 8px
 
 .score
-  font-size: 14px
   font-weight: bold
+
+.noCardsContainer
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 45px 0 45px 0
+
+.noCardsTitle
+  font-weight: 300
+  color: $main-violet

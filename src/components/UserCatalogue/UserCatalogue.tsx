@@ -15,7 +15,7 @@ export const UserCatalogue = () => {
             <div className={style.border}></div>
             <div className={style.catalogueContainer}>
                 <h1 className={style.catalogueName}>{setCatalogueName()}</h1>
-                <CatalogueCardList/>
+                <CatalogueCardList isFavouritesPage={true} isMostPopular/>
             </div>
         </>
     )
