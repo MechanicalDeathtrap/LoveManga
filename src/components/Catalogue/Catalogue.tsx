@@ -1,9 +1,191 @@
-import style from "./Catalogue.module.sass"
+import style from "./Catalogue.module.sass";
 import {CatalogueCardList} from "../CatalogueCardList/CatalogueCardList.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { Accordion, AccordionItem as Item } from '@szhsin/react-accordion';
 import axios from "axios";
 import {MangaTypes} from "../../types/Manga.types.ts";
+import {useLocation} from "react-router-dom";
+
+const AccordionItem = ({ header, ...rest }) => (
+    <Item
+        {...rest}
+        header={
+            <div className={style.accordionHeader}>
+                {header}
+                <img className={style.chevron} src="/src/assets/arrow-right.svg" alt="Chevron Down" />
+            </div>
+        }
+        className={style.item}
+        buttonProps={{
+            className: ({ isEnter }) =>
+                `${style.itemBtn} ${isEnter && style.itemBtnExpanded}`,
+        }}
+        contentProps={{ className: style.itemContent }}
+        panelProps={{ className: style.itemPanel }}
+    />
+);
+
+export const Catalogue = () => {
+    const [isMostPopular, setMostPopular] = useState(false);
+
+    const [genres, setGenres] = useState<string[]>([]);
+    const [themes, setThemes] = useState<string[]>([]);
+    const [demographic, setDemographic] = useState<string[]>([]);
+    const [rating, setRating] = useState<number | null>(null);
+    const [filteredManga, setFilteredManga] = useState([] as MangaTypes[]);
+    const [openItems, setOpenItems] = useState<string | null>(null);
+    const location = useLocation();
+    const [filterGenre, setFilterGenre] = useState('');
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const genre = params.get('tag');
+        if (genre) {
+            setFilterGenre(genre);
+            setGenres([genre]);
+        }
+    }, [location.search]);
+
+    useEffect(() => {
+        if (filterGenre) {
+            console.log(`Фильтрация по жанру: ${filterGenre}`);
+            handleSearch();
+        }
+        console.log(filterGenre);
+    }, [filterGenre]);
+
+    const handleSearch = async () => {
+        const filters = {
+            genres,
+            themes,
+            demographic,
+            rating
+        };
+
+        try {
+            const res = await axios.post('http://localhost:4444/manga/search', filters);
+            console.log(res.data);
+            setFilteredManga(res.data);
+        } catch (err) {
+            console.error("Ошибка поиска манги:", err);
+        }
+    };
+
+    const handleSelect = (type: string, value: string | number) => {
+        switch (type) {
+            case 'genre':
+                setGenres([...genres, value as string]);
+                break;
+            case 'theme':
+                setThemes([...themes, value as string]);
+                break;
+            case 'demographic':
+                setDemographic([...demographic, value as string]);
+                break;
+            case 'rating':
+                setRating(value as number);
+                break;
+            default:
+                break;
+        }
+        setOpenItems(null);
+    };
+
+    const renderOptions = (type: string, options: string[] | number[]) => (
+        <div className={style.optionsContainer}>
+            {options.map(option => (
+                <option
+                    key={option.toString()}
+                    value={option}
+                    onClick={() => handleSelect(type, option)}
+                >
+                    {option}
+                </option>
+            ))}
+        </div>
+    );
+
+    const clearFilters = () => {
+        setGenres([]);
+        setThemes([]);
+        setDemographic([]);
+        setRating(null);
+        setFilterGenre('');
+    };
+
+    return (
+        <>
+            <div className={style.border}></div>
+            <div className={style.catalogueContainer}>
+                <aside className={style.filter}>
+                    <div className={style.filterTitleContainer}>
+                        <h3 className={style.filterTitle__title}>Фильтр</h3>
+                        <button className={style.clearButton} onClick={clearFilters}>
+                            <img src="/src/assets/cross.svg" alt="cross" className={style.deleteFilters} />
+                        </button>
+                    </div>
+                    <Accordion className={style.filters} openItems={openItems}>
+                        <div className={style.filterBorder}>
+                            <div className={style.filterBorderBackground}>
+                                <AccordionItem
+                                    header={`Жанр${genres.length ? `: ${genres.join(', ')}` : ''}`}
+                                    className={style.filterSection}
+                                    onClick={() => setOpenItems(openItems === 'genre' ? null : 'genre')}
+                                >
+                                    {renderOptions('genre', ["Action", "Adventure", "Award Winning", "Drama", "Fantasy", "Horror", "Supernatural", "Slice of life", "Suspense", "Sci-Fi", "Comedy"])}
+                                </AccordionItem>
+                            </div>
+                        </div>
+                        <div className={style.filterBorder}>
+                            <div className={style.filterBorderBackground}>
+                                <AccordionItem
+                                    header={`Теги${themes.length ? `: ${themes.join(', ')}` : ''}`}
+                                    className={style.filterSection}
+                                    onClick={() => setOpenItems(openItems === 'theme' ? null : 'theme')}
+                                >
+                                    {renderOptions('theme', ["Gore", "Military", "Mythology", "Psychological", "Survival", "Historical", "Samurai", "Super power", "Parody", "Horror"])}
+                                </AccordionItem>
+                            </div>
+                        </div>
+                        <div className={style.filterBorder}>
+                            <div className={style.filterBorderBackground}>
+                                <AccordionItem
+                                    header={`Рейтинг${rating ? `: ${rating}` : ''}`}
+                                    className={style.filterSection}
+                                    onClick={() => setOpenItems(openItems === 'rating' ? null : 'rating')}
+                                >
+                                    {renderOptions('rating', [9, 8, 7, 6, 5, 4, 3, 2, 1])}
+                                </AccordionItem>
+                            </div>
+                        </div>
+                    </Accordion>
+                    <button type="button" onClick={handleSearch} className={style.searchButton}>Поиск</button>
+                </aside>
+                <div className={style.bottomLine}></div>
+                <div className={style.catalogueCollection}>
+                    <div className={style.catalogueTitle}>
+                        <h3 className={style.catalogueTitle__title}>Каталог</h3>
+                        <div className={style.filterContainer}>
+                            <button type="button" className={style.ratingFilter} onClick={() => setMostPopular((prevState) => !prevState)}>По рейтингу</button>
+                            <img src="/src/assets/filter.svg" alt="filter" />
+                        </div>
+                    </div>
+                    <CatalogueCardList isFavouritesPage={false} isMostPopular={isMostPopular} filteredManga={filteredManga} />
+                </div>
+            </div>
+        </>
+    );
+};
+
+
+/*
+import style from "./Catalogue.module.sass"
+import {CatalogueCardList} from "../CatalogueCardList/CatalogueCardList.tsx";
+import {useEffect, useState} from "react";
+import { Accordion, AccordionItem as Item } from '@szhsin/react-accordion';
+import axios from "axios";
+import {MangaTypes} from "../../types/Manga.types.ts";
+import {useLocation} from "react-router-dom";
 
 const AccordionItem = ({ header, ...rest }) => (
     <Item
@@ -32,6 +214,23 @@ export const Catalogue = () =>{
     const [rating, setRating] = useState<number | null>(null);
     const [filteredManga, setFilteredManga] = useState([] as MangaTypes[]);
     const [openItems, setOpenItems] = useState<string | null>(null);
+    const location = useLocation();
+    const [filterTag, setFilterTag] = useState('');
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const tag = params.get('tag');
+        if (tag) {
+            setFilterTag(tag);
+        }
+    }, [location.search]);
+
+    useEffect(() => {
+        if (filterTag) {
+            console.log(`Фильтрация по тегу: ${filterTag}`);
+            handleSearch()
+        }
+    }, [filterTag]);
 
     const handleSearch = async () => {
             await axios.post('http://localhost:4444/manga/search', {
@@ -64,7 +263,7 @@ export const Catalogue = () =>{
             default:
                 break;
         }
-        setOpenItems(null); // Close the accordion
+        setOpenItems(null);
     };
 
     const renderOptions = (type: string, options: string[] | number[]) => (
@@ -81,7 +280,7 @@ export const Catalogue = () =>{
         </div>
     );
 
-    const сlearFilters = () => {
+    const clearFilters = () => {
         setGenres([]);
         setThemes([]);
         setDemographic([]);
@@ -95,7 +294,7 @@ export const Catalogue = () =>{
                 <aside className={style.filter}>
                     <div className={style.filterTitleContainer}>
                         <h3 className={style.filterTitle__title}>Фильтр</h3>
-                        <button className={style.clearButton} onClick={сlearFilters}>
+                        <button className={style.clearButton} onClick={clearFilters}>
                             <img src="/src/assets/cross.svg" alt="cross" className={style.deleteFilters} />
                         </button>
                     </div>
@@ -151,7 +350,7 @@ export const Catalogue = () =>{
         </>
     );
 
-/*    return(
+/!*    return(
         <>
             <div className={style.border}></div>
             <div className={style.catalogueContainer}>
@@ -264,5 +463,5 @@ export const Catalogue = () =>{
                 </div>
             </div>
         </>
-    )*/
-}
+    )*!/
+}*/

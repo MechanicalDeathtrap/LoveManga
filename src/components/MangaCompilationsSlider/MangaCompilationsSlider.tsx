@@ -1,9 +1,14 @@
 import style from "./MangaCompilationsSlider.module.sass"
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import {useNavigate} from "react-router-dom";
 
 export const MangaCompilationsSlider = () => {
+    const navigate = useNavigate();
 
+    const handleCardClick = (tag: string) => {
+        navigate(`/catalogue?tag=${tag}`);
+    };
 
     return(
         <div className={style.collectionContainer}>
@@ -13,7 +18,7 @@ export const MangaCompilationsSlider = () => {
             </div>
 
             <div className={style.collectionCards} >
-                <div className={style.cardBorder}>
+                <div className={style.cardBorder} onClick={() => handleCardClick('Drama')}>
                     <div className={style.card}>
                         <div className={style.textInformation}>
                             <h3 className={style.collectionTitle}>У нас любовь!</h3>
@@ -22,7 +27,7 @@ export const MangaCompilationsSlider = () => {
                         <img src="/src/assets/manga.png" alt="card_image" className={`${style.cardImage} ${style.loveCollectionImage}`}/>
                     </div>
                 </div>
-                <div className={style.cardBorder}>
+                <div className={style.cardBorder} onClick={() => handleCardClick('Supernatural')}>
                     <div className={style.card}>
                         <div className={style.textInformation}>
                             <h3 className={style.collectionTitle}>Абракадабра~</h3>
