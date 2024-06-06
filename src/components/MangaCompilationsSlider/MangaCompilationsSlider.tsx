@@ -21,8 +21,8 @@ export const MangaCompilationsSlider = () => {
                 <div className={style.cardBorder} onClick={() => handleCardClick('Drama')}>
                     <div className={style.card}>
                         <div className={style.textInformation}>
-                            <h3 className={style.collectionTitle}>У нас любовь!</h3>
-                            <p className={style.info}>Здесь собраны только самые романтичные тайтлы, представленные на нашем сайте</p>
+                            <h3 className={style.collectionTitle}>Какая драма!</h3>
+                            <p className={style.info}>Здесь собраны только самые драматичные тайтлы, представленные на нашем сайте</p>
                         </div>
                         <img src="/src/assets/manga.png" alt="card_image" className={`${style.cardImage} ${style.loveCollectionImage}`}/>
                     </div>
@@ -31,12 +31,12 @@ export const MangaCompilationsSlider = () => {
                     <div className={style.card}>
                         <div className={style.textInformation}>
                             <h3 className={style.collectionTitle}>Абракадабра~</h3>
-                            <p className={style.info}>Коллекция произведений, где каждый мир наполнен чудесами и магией</p>
+                            <p className={style.info}>Коллекция произведений, где каждый мир наполнен мистикой</p>
                         </div>
                         <img src="/src/assets/anime-green.png" alt="card_image" className={style.cardImage}/>
                     </div>
                 </div>
-                <div className={style.cardBorder}>
+{/*                <div className={style.cardBorder}>
                     <div className={style.card}>
                         <div className={style.textInformation}>
                             <h3 className={style.collectionTitle}>Абракадабра~</h3>
@@ -44,7 +44,7 @@ export const MangaCompilationsSlider = () => {
                         </div>
                         <img src="/src/assets/anime-green.png" alt="card_image" className={style.cardImage}/>
                     </div>
-                </div>
+                </div>*/}
             </div>
 
             <div className={`${style.arrowContainer} ${style.arrowLeft}`}>

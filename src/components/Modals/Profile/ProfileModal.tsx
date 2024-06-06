@@ -27,7 +27,7 @@ export const ProfileModal = () =>{
                         :
                         <img src="/src/assets/heart_logo.svg" alt="profile_photo" className="profileImage"/>
                 }
-                <span className={style.profileName}>Mechanical Deathtrap</span>
+                <span className={style.profileName}>NickName</span>
             </Link>
             <div className={style.profileButtons}>
                 <Link to='/profile/favourites' className={style.menuItem}>

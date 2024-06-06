@@ -26,6 +26,7 @@ export const CatalogueCardList = ({isMostPopular, isFavouritesPage, filteredMang
         axios.get('http://localhost:4444/catalogue')
             .then((res: AxiosResponse<MangaTypes[]>) =>{
                 setMangas(res.data);
+                console.log(res.data);
             })
             .catch((err) =>{
                 console.log(`Ошибка при получении манги: ${err}`);
@@ -37,6 +38,7 @@ export const CatalogueCardList = ({isMostPopular, isFavouritesPage, filteredMang
             {headers: headers})
             .then((res: AxiosResponse<MangaTypes[]>) => {
                 setMangas(res.data)
+                console.log(res.data);
             }).catch((err) =>{
             console.log(`Ошибка при получении манги: ${err}`);
         })
@@ -54,6 +56,8 @@ export const CatalogueCardList = ({isMostPopular, isFavouritesPage, filteredMang
             console.log('getManga');
             getMangas()
         }
+
+        console.log(mangas);
     }, [])
 
     useEffect(()=>{
@@ -74,7 +78,11 @@ export const CatalogueCardList = ({isMostPopular, isFavouritesPage, filteredMang
         <ul className={style.listCard}>
             {
                 mangas.length > 0 ?
-                mangas.map((manga: MangaTypes, index) =>{
+                mangas.map((manga, index) =>{
+                    {
+                        isFavouritesPage ?
+                            manga = manga.manga : manga;
+                    }
                     return(
                         <li key={index}>
                             <Link to={`/titles/${manga._id}`} className={style.cardContainer}>
